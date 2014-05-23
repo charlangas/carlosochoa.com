@@ -1,6 +1,6 @@
 
 body {
-  background: #e5e5e5;
+  background: #fff;
 }
 
 header {
@@ -37,7 +37,7 @@ li {
 }
 
 .alternate {
-  background: #fcfcfc;
+  background: #f5f5f5;
 }
 
 .borderBottom {
