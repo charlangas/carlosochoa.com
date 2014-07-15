@@ -1,48 +1,37 @@
-
-body {
-  background: #fff;
+body, a, a:hover {
+  color: #3b3b3f;
+  text-decoration: none;
 }
 
-header {
-  padding-left: 1em;
-  position: fixed;
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
 }
 
-header h1 {
-  font-family: 'PT Mono', courier, Georgia, serif;
-  font-size: 1.1em;
-  letter-spacing: .2em;
-  margin-left: 2px;
-  margin-top: -74px;
+h1 {
+  font-size: 6em;
+  letter-spacing: -0.03em;
+  margin-left: -4px;
+}
+
+h2 {
+  font-size: 3em;
+  letter-spacing: -0.02em;
+}
+
+nav {
+  border: none;
+  font-family: 'PT Mono', courier, serif;
+  font-size: .8em;
+  letter-spacing: 0.3em;
+  /*padding: 1em;*/
   text-transform: uppercase;
 }
 
-header a {
-  color: #ffd400;
-  font-family: 'Oswald', Helvetica, sans-serif;
-  text-decoration: none;
-}
-
-header a:hover {
-  text-decoration: none;
-}
-
-header p {
-  font-size: 3.5em;
-  text-transform: uppercase;
-}
-
-li {
-  text-decoration: none;
-}
-
-.alternate {
-  background: #f5f5f5;
-}
-
-.borderBottom {
-  border-bottom: 1px solid #aaa;
-  padding: 1em 0 1em 0;
+p {
+  font-size: 1.2em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.8em;
 }
 
 .center {
@@ -50,15 +39,25 @@ li {
 }
 
 .contentPage {
-  padding: 5em 0 5em 0;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 5em;
 }
 
-.bartletts {
-  padding-bottom: 10em;
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background: rgba(255, 212, 0, 0.6);
 }
 
-.gray {
-  color: #ccc;
+.dropdown-menu li {
+  letter-spacing: 0px;
+  text-transform: capitalize;
+}
+
+.dropdown-menu li a {
+  padding-left: 3em;
+}
+.dropdown-menu li a:hover {
+  background: #FFD400;
 }
 
 .halfHD {
@@ -66,29 +65,144 @@ li {
   height: 635px;
 }
 
-.highlight {
-  color: #00ba86;
+.imgHeader {
+  margin-bottom: -2em;
+  margin-top: 2em;
 }
 
-.paginados {
-  text-align: left;
+.intro {
+  background: #eee;
+  padding-top: 7em;
+  padding-bottom: 8em;
 }
 
-.projectTag {
-  font-size: .8em;
-  color: #e0a400;
+.intro img {
+  border-radius: 50%;
 }
 
-.screenshot {
-  padding-bottom: 5em;
+.intro p {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
-.screenshot a {
+.iOS {
+  margin-bottom: -4em;
+  max-width: 500px;
+}
+
+#Bartletts {
+  color: #1a1613;
+  background: #f3f3f3;
+  border-bottom: none;
+}
+
+#Bartletts h1 {
+  font-size: 4em;
+}
+
+#laTercera img {
+  padding-bottom: 4em;
+  max-width: 200px;
+}
+
+#Logos {
+  background: #f3f3f3;
+  border-bottom: none;
+}
+
+#PaginaDos {
+  background: #f3f3f3;
+  border-bottom: none;
+}
+
+#Penguin {
+  background: #f3f3f3;
+  border-bottom: none;
+}
+
+#Penguin img {
+  height: 250px;
+}
+
+.navbar {
+  background: rgba(234, 234, 234, 0.85);
+  border: none;
+}
+
+.navbar-brand {
+  font-size: 1em;
+}
+
+.navbar-nav > li {
+  padding: 0 1em;
+}
+
+.paginados h2 {
+  text-align: right;
+  margin-top: -5px;
+}
+
+.project a {
+  color: #3547ce;
+}
+.project a:hover {
   text-decoration: underline;
 }
 
-.screenshot img {
+.project img {
+  max-width: 1100px;
+  margin-top: 3em;
+  margin-bottom: 4em;
   width: 100%;
+}
+
+.project p {
+  font-family: Georgia, serif;
+  font-size: 1.5em;
+  letter-spacing: 0.04em;
+  line-height: 1.8em;
+  padding-bottom: 1em;
+}
+
+.projectDescription{
+  padding-left: 2em;
+}
+
+.projectDivider {
+  border-top: 1px solid #ccc;
+  margin-top: 3em;
+  padding-top: 3em;
+}
+
+.projectIcon {
+  margin: 2em auto;
+  width: 100%;
+}
+
+.projectNumber {
+  color: #FFD400;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2em;
+  margin: 1em auto;
+  width: 0%;
+}
+
+.projectTag, .viewMore {
+  color: #ccc;
+  font-family: 'Oswald', sans-serif;
+  font-size: .8em;
+  font-weight: 300;
+  letter-spacing: .15em;
+  margin-left: 2px;
+  text-transform: uppercase;
+}
+.projectTag:hover {
+  color: #999;
+}
+
+.screenshot p {
+  margin-top: -4em;
 }
 
 .shadow {
@@ -97,29 +211,92 @@ li {
   box-shadow: 0px 0px 15px rgba(68,68,68,0.1);
 }
 
+.ToC {
+  border-bottom: 1px solid #ccc;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  line-height: 1.5em;
+  margin-bottom: 3em;
+  padding-bottom: 2em;
+  text-transform: uppercase;
+}
+
+.viewMore {
+  color: #999;
+  font-size: .6em;
+}
+.viewMore:hover {
+  color: #FFD400;
+  text-decoration: none;
+}
+
+.visit {
+  font-family: 'PT Mono', serif !important;
+  font-size: 1em !important;
+  letter-spacing: .15em;
+  padding-top: 40px;
+  text-transform: uppercase;
+}
+
 .workSample {
-  padding: 5em 0 0 0;
+  background: #f8f8f8;
 }
+
+.workSample img {
+  padding-bottom: 1em;
+}
+
+.workSample p {
+  font-size: 1em;
+  padding-bottom: 0em;
+}
+
+@media (max-width:823px) {
+  .navbar-nav > li {
+    padding: 0em;
+  }
+}
+
 @media (max-width:767px) {
-  header h1 {
-    margin-top: -50px;
+  h1 {
+    font-size: 2.5em;
+    padding-bottom: 1em;
+    text-align: center;
   }
 
-  header p {
-    font-size: 2.2em;
+  h2 {
+    font-size: 2em;
   }
 
-  .contentPage .center img {
-    width: 80%;
+  .intro {
+    padding-top: 3em;
+    padding-bottom: 5em;
+    text-align: center;
   }
 
-  .halfHD {
-    width: 300px;
-    height: 205px;
+  .intro p {
+    font-size: 1em;
+    margin-top: -20px;
   }
 
-  .logos {
-  padding: 5em 0 5em 0;
+  .navbar {
+    background: rgba(234, 234, 234, 0.9);
+  }
+
+  .paginados h2 {
+    text-align: center;
+  }
+
+  .project p {
+    font-size: 1em;
+  }
+
+  .projectNumber {
+    margin: 0 auto;
+  }
+
+  .projectTag {
+    font-size: .6em;
   }
 }
-

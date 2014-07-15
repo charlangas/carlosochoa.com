@@ -6,9 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
   <title>Carlos Ochoa | Design. UX. Strategy</title>
-  <link href="css/style.css" media="all" rel="stylesheet" />
   <link href="css/bootstrap.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=PT+Mono|Oswald:700' rel='stylesheet' type='text/css'>
+  <link href="css/style.css" media="all" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Playfair+Display|PT+Mono|Roboto:300|Oswald:300' rel='stylesheet' type='text/css'>
+
+  <style>
+    ::selection {
+      background: #ddd; /* Safari */
+    }
+
+    ::-moz-selection {
+      background: #ddd; /* Firefox */
+    }
+  </style>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,10 +41,6 @@
 
 </head>
 <body>
-  <header>
-    <p><a href="../index.html">Design</a><span class="gray">.</span><a href="../index.html">UX</a><span class="gray">.</span><a href="../index.html">Strategy</a></p>
-    <h1>Carlos Ochoa<h2>
-  </header>
 
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container-fluid">
@@ -45,54 +51,58 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">carlos ochoa</a>
+      <a class="navbar-brand" href="index.html">carlos ochoa</a>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse  navbar-right" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">projects <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li role="presentation" class="dropdown-header">Creative</li>
-            <li><a href="projects/paginados.html">paginados.com</a></li>
-            <li><a href="projects/bartletts.html">bartlet's familiar quotations</a></li>
+            <li><a href="projects/paginados.html">pagina dos</a></li>
+            <li><a href="projects/bartletts.html">bartlett's familiar quotations</a></li>
             <li><a href="projects/penguin.html">penguin books</a></li>
             <li><a href="projects/stanfordgourmetburger.html">stanford gourmet burger</a></li>
+            <!-- <li><a href="projects/latercera.html">IJAM</a></li> -->
             <li><a href="projects/logos.html">logos</a></li>
+            <li><a href="index.html">See all &gt;</a></li>
             <li class="divider"></li>
             <li role="presentation" class="dropdown-header">Strategy</li>
             <li><a href="#">Process</a></li>
           </ul>
         </li>
-        <li><a href="#">about me</a></li>
+        <li><a href="../about.html">about me</a></li>
         <li><a href="mailto:charlangas@gmail.com" target="_blank">email</a></li>
         <li><a href="http://www.twitter.com/charlangas" target="_blank">twitter</a></li>
         <li><a href="http://www.linkedin.com/profile/view?id=54118696&trk=nav_responsive_tab_profile_pic" target="_blank">linkedin</a></li>
     </div>
   </nav>
 
-  <div class="container contentPage">
-      <div class="col-md-4 col-md">
+  <div class="container contentPage project">
+      <div class="col-md-8 col-md-offset-2">
         <div class="borderBottom">
-          <p>I was born and raised in Mexico, but as a designer I grew up in New York City. After attending SVA as an advertising major, I fell in love with the possibilities of the web and was lucky enough to join the talented folks at <a href="http://www.itsmakeable.com/" target="_blank">POKE New York</a> as a designer. A couple of years later I returned to my hometown of Guadalajara to launch a <a href="projects/paginados.html">startup</a>. I learned a lot, but my co-founders and I decided the sanest thing to do was to close the company. Failure makes you strong. Now I'm available for freelance work as a web designer and a data-driven digital strategist.<br /><br />Please feel free to <a href="mailto:charlangas@gmail.com" target="_blank">email me</a> if you'd like to chat :)</p>
+          <p>I was born and raised in Mexico, but as a designer I grew up in New York City. After attending <a href="http://www.sva.edu/undergraduate/advertising" target"_blank">SVA</a> as an advertising major, I fell in love with the possibilities of the web and was lucky enough to join the talented folks at <a href="http://www.itsmakeable.com/" target="_blank">POKE New York</a> as a designer. A couple of years later I returned to my hometown of Guadalajara to launch a <a href="projects/paginados.html">startup</a>. I learned a lot, but my co-founders and I decided the sanest thing to do was to close the company. Failure makes you strong. Now I'm available for freelance work as a web designer and a data-driven digital strategist.<br /><br />Please feel free to <a href="mailto:charlangas@gmail.com" target="_blank">email me</a> if you'd like to chat :)</p>
         </div>
         <div class="col-md-12 borderBottom">
-          <p><strong>Noteworthy clients</strong></p>
+          <p>Noteworthy clients</p>
           <ul>
             <li>American Express</li>
             <li>The Body Shop</li>
             <li>Penguin Books</li>
+            <li>thinkThin</li>
           </ul>
         </div>
         <div class="col-md-12 borderBottom">
-          <p><strong>Work</strong></p>
+          <p>Work</p>
           <ul>
+            <li><a href="http://littlearrows.com/" target="_blank">Little Arrows</a></li>
             <li><a href="http://www.itsmakeable.com/" target"_blank">POKE New York</a> (now Makeable).</li>
             <li><a href="http://adcglobal.org/" target"_blank">The Art Director's Club, NYC.</a></li>
             <li><a href="http://www.taxi.ca/" target"_blank">Taxi, NYC.</a></li>
           </ul>
         </div>
         <div class="col-md-12 borderBottom">
-          <p><strong>Tools of the trade</strong></p>
+          <p>Tools of the trade</p>
           <ul>
             <li>Adobe Photoshop + Illustrator</li>
             <li>Sketch</li>
@@ -103,7 +113,7 @@
           </ul>
         </div>
         <div class="col-md-12 borderBottom">
-          <p><strong>Education</strong></p>
+          <p>Education</p>
           <ul>
             <li><a href="http://www.sva.edu/undergraduate/advertising" target"_blank">School of Visual Arts, NYC.</a> (2006 - 2010)</li>
             <li>Life. (1986 - present)</li>
