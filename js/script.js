@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile Navigation Toggle
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const mainHeader = document.querySelector('.main-header');
+    // const mainHeader = document.querySelector('.main-header'); // Not strictly needed for this section
 
     if (mobileNavToggle && navLinks) {
         mobileNavToggle.addEventListener('click', function() {
@@ -109,17 +109,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Update active state for shortcut buttons
         shortcutButtons.forEach(button => {
-            if (button.getAttribute('href').endsWith('?filter=' + filterCategory) || (filterCategory === 'all' && button.getAttribute('href').endsWith('?filter=all'))) {
-                button.classList.add('active-filter'); // You'll need to style .active-filter in CSS
+            const buttonFilter = button.getAttribute('href').includes('?filter=') ? button.getAttribute('href').split('=')[1] : null;
+            if (buttonFilter === filterCategory) {
+                button.classList.add('active-filter');
             } else {
                 button.classList.remove('active-filter');
             }
         });
-         // Update active state for nav filter links (more complex due to full URLs)
         navFilterLinks.forEach(link => {
-            if (link.getAttribute('href').includes('?filter=' + filterCategory)) {
+            const linkFilter = new URL(link.href).searchParams.get('filter');
+            if (linkFilter === filterCategory) {
                 link.classList.add('active-filter');
             } else {
                 link.classList.remove('active-filter');
@@ -127,45 +127,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Get filter from URL on page load (for projects.html)
     const urlParams = new URLSearchParams(window.location.search);
     const initialFilter = urlParams.get('filter');
 
     if (initialFilter && (document.body.contains(projectRows[0]) || window.location.pathname.includes('projects.html'))) {
         filterProjects(initialFilter);
-    } else if (projectRows.length > 0) { // Default to 'all' if on a page with projects and no filter
+    } else if (projectRows.length > 0 && !initialFilter) {
         filterProjects('all');
+        // Highlight the "All" button if it exists and we are defaulting to all
+        shortcutButtons.forEach(button => {
+            if (button.getAttribute('href').endsWith('?filter=all')) {
+                button.classList.add('active-filter');
+            }
+        });
     }
 
-
-    // Add event listeners to shortcut buttons (likely on index.html)
     shortcutButtons.forEach(button => {
         button.addEventListener('click', function(event) {
-            // If the button click is on index.html and links to projects.html,
-            // the filtering will be handled by the URL parameter on projects.html load.
-            // If you want to filter directly on index.html (if projects are also listed there):
             if (window.location.pathname.includes('index.html') || !this.getAttribute('href').includes('projects.html')) {
-                event.preventDefault(); // Prevent navigation if filtering on the same page
+                event.preventDefault();
                 const filterValue = this.getAttribute('href').split('=')[1];
                 filterProjects(filterValue);
-                // If on index.html, and you also want to update the URL hash for history/bookmarking (optional):
-                // window.location.hash = 'filter=' + filterValue;
             }
         });
     });
 
-    // Add event listeners to navigation filter links (in the dropdown)
     navFilterLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            // Similar to shortcut buttons, filtering is handled by URL param on projects.html.
-            // If projects.html is the current page and you want instant filtering without page reload:
             if (window.location.pathname.includes('projects.html')) {
                  event.preventDefault();
                  const filterValue = new URL(this.href).searchParams.get('filter');
                  filterProjects(filterValue);
-                 // Optionally update URL without full reload
                  history.pushState(null, '', 'projects.html?filter=' + filterValue);
             }
         });
     });
+
+    // --- SVG LOGO HOVER SWAP ---
+    const logoLink = document.querySelector('.logo a');
+    if (logoLink) {
+        const logoImage = logoLink.querySelector('img');
+        if (logoImage) {
+            const originalLogoSrc = logoImage.src; // Stores the initial src
+            const hoverLogoSrc = 'images/carlos-hover.svg'; // CHANGE THIS to your hover SVG path
+
+            logoLink.addEventListener('mouseenter', function() {
+                logoImage.src = hoverLogoSrc;
+            });
+
+            logoLink.addEventListener('mouseleave', function() {
+                logoImage.src = originalLogoSrc;
+            });
+        }
+    }
 });
