@@ -1,0 +1,871 @@
+/* --- Google Font Import (already in HTML, but good to note) --- */
+/* @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@200..800&display=swap'); */
+
+/* --- CSS Variables --- */
+:root {
+    --font-primary: 'Manrope', sans-serif;
+    --font-secondary: 'Instrument Serif', serif;
+
+    --color-text: #333333; /* Dark Grey */
+    --color-background: #F8F8F8; /* Very Light Grey */
+    --color-primary-accent: #1852e5; /* A subtle blue, change as you like */
+    --color-secondary-accent: #EAEAEA; /* Light grey for borders/bg accents */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --spacing-xs: 0.25rem;  /* 4px */
+    --spacing-s: 0.5rem;   /* 8px */
+    --spacing-m: 1rem;     /* 16px */
+    --spacing-l: 1.5rem;   /* 24px */
+    --spacing-xl: 2rem;    /* 32px */
+    --spacing-xxl: 3rem;   /* 48px */
+    --spacing-xxxl: 4rem;  /* 64px */
+    --spacing-xxxxl: 5rem;  /* 80px */
+    --spacing-xxxxxl: 6rem;  /* 96px */
+
+    --container-max-width: 1400px;
+    --container-side-padding: 8%;
+    --header-height: 80px;
+}
+
+/* --- Global Reset & Base Styles --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Corresponds to 16px by default */
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text);
+    background-color: var(--color-background);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-m);
+}
+
+h1 {
+    font-family: var(--font-primary);
+}
+
+h2 {
+    font-size: 2.25rem; /* 36px */
+    font-family: var(--font-primary);
+    margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+}
+
+h3.project-title {
+    font-family: var(--font-secondary);
+    font-size: 1.75rem; /* 28px */
+    font-weight: 400; /* Instrument serif looks good at normal weight */
+}
+
+p {
+    margin-bottom: var(--spacing-m);
+}
+
+a {
+    color: var(--color-primary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    color: var(--color-primary-accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+.accent {
+    color: var(--color-primary-accent);
+}
+
+/* --- Utility Classes --- */
+.generic-container {
+    width: 100%; /* Take full width available */
+    max-width: var(--container-max-width); /* But not more than 1400px */
+    margin-left: auto; /* Center it */
+    margin-right: auto; /* Center it */
+    padding-left: var(--container-side-padding); /* 5% padding on the left */
+    padding-right: var(--container-side-padding); /* 5% padding on the right */
+}
+
+/* --- Helper for applying container styles --- */
+.content-wrapper {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-side-padding);
+    padding-right: var(--container-side-padding);
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-s) var(--spacing-l);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn-contact {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    border-color: var(--color-primary-accent);
+}
+
+.btn-contact:hover {
+    background-color: #004488; /* Darker shade of primary accent */
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+.btn-shortcut {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-secondary-accent);
+    margin: var(--spacing-s) var(--spacing-s) var(--spacing-s) 0;
+    font-weight: 500;
+}
+
+.btn-shortcut:hover {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+    border-color: var(--color-primary-accent);
+}
+
+
+/* --- Header & Navigation --- */
+.main-header {
+    background-color: var(--color-background);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    display: flex; /* Keeps the nav centered if it has its own max-width */
+    align-items: center;
+}
+
+.navigation {
+    /* MODIFIED: Apply container principles */
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-side-padding);
+    padding-right: var(--container-side-padding);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; /* Ensure it fills the header height */
+}
+
+.logo a {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.logo a img {
+    height: 50px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: var(--spacing-xl);
+}
+
+.nav-links a {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1rem; /* 16px */
+    position: relative;
+    padding: var(--spacing-s) 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after { /* Add .active class with JS for current page */
+    width: 100%;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-white);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    border-radius: 4px;
+    padding: var(--spacing-s) 0;
+    margin-top: var(--spacing-s); /* Space between button and dropdown */
+}
+
+.dropdown-content a {
+    color: var(--color-text);
+    padding: var(--spacing-s) var(--spacing-l);
+    text-decoration: none;
+    display: block;
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+.dropdown-content a::after { /* Remove underline effect from dropdown items */
+    display: none;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--color-secondary-accent);
+    color: var(--color-primary-accent);
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content { /* Show on hover or when an item inside has focus */
+    display: block;
+}
+
+.dropdown-arrow {
+    font-size: 0.7em;
+    margin-left: var(--spacing-xs);
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* Mobile Navigation Toggle */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default, shown in media query */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-s);
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    background-color: var(--color-background);
+    padding-top: var(--spacing-xxxl);
+    padding-bottom: var(--spacing-xxxl);
+}
+
+.hero-content {
+    /* MODIFIED: Apply container principles */
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-side-padding);
+    padding-right: var(--container-side-padding);
+    text-align: left;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    margin-bottom: var(--spacing-l);
+    font-weight: 700;
+    color: var(--color-black);
+    max-width: 700px;
+}
+
+.hero .subheader {
+    font-size: 1.25rem;
+    font-weight: 400;
+    max-width: 700px; /* This can remain to control line length for readability within the container */
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text);
+    line-height: 1.7;
+}
+
+.shortcut-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-m);
+    margin-top: var(--spacing-xl);
+}
+
+
+/* --- Featured Work Section --- */
+.featured-work {
+    /* MODIFIED: The section itself will manage the container padding for its direct children */
+    width: 100%;
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    /* Add container padding here if h2 is directly inside and not wrapped */
+    /* Or ensure h2 and project rows are within a .content-wrapper */
+}
+
+.featured-work > h2 { /* If h2 is a direct child */
+    /* MODIFIED: Apply container principles or ensure it's within a wrapper */
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-side-padding);
+    padding-right: var(--container-side-padding);
+    text-align: left; /* Or center, as you prefer for this heading */
+    /* If you want the h2 centered within the content area:
+    display: block; text-align: center; */
+}
+
+.project-row {
+    display: flex;
+    flex-direction: column;
+    height: clamp(50vh 66vh 175px);
+    margin-bottom: var(--spacing-xxxl);
+    width: 100%; /* This will be 100% of its parent that has the container padding */
+    max-width: var(--container-max-width); /* Safety net if not nested correctly */
+    margin-left: auto;
+    margin-right: auto;
+    /* The 5% padding should be on a PARENT of project-row */
+}
+
+.project-row:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.project-image-container {
+    width: 100%; /* Full width of the .project-row */
+    height: clamp(66% 75% 175px);
+    overflow: hidden;
+    position: relative;
+}
+
+.project-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-info {
+    width: 100%; /* Full width to allow inner content to be 2/3 */
+    padding: var(--spacing-xl) var(--spacing-l); /* Padding within the text block */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.project-info .project-title,
+.project-info .project-subtitle {
+    width: 66.66%;
+    max-width: 800px; /* This max-width is *within* the .project-info block */
+}
+
+.project-info .project-title {
+    margin-bottom: var(--spacing-s);
+}
+
+.project-info .project-subtitle {
+    font-size: 1rem; /* 16px */
+    font-weight: 400; /* Manrope regular */
+    color: #555555; /* Slightly lighter than main text */
+    line-height: 1.75;
+}
+
+
+/* --- Footer --- */
+.main-footer {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-m);
+    font-family: var(--font-primary);
+    /* MODIFICATION: The footer background spans full width, the .footer-content div will act as the container */
+}
+
+.footer-content, .footer-bottom {
+    /* MODIFIED: Apply container principles */
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-side-padding);
+    padding-right: var(--container-side-padding);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-l); /* Original margin-bottom */
+    flex-wrap: wrap;
+}
+
+.footer-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.footer-social a {
+    color: var(--color-text);
+    margin-left: var(--spacing-l);
+    display: inline-block;
+}
+
+.footer-social a svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text);
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover svg {
+    fill: var(--color-primary-accent); /* Change color on hover */
+    transform: scale(1.1);
+}
+
+/* --- Project Listing Page Specifics --- */
+.project-listing .content-wrapper > h2 {
+    /* Styles for the "All Work", "Design Projects" title */
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 2rem; /* Adjust as needed */
+    margin-bottom: var(--spacing-xl);
+    /* text-align: center; /* If you want it centered */
+}
+
+.project-link-wrapper {
+    display: flex; /* Changed from block to flex */
+    flex-direction: column; /* Stack image and info vertically */
+    text-decoration: none;
+    color: inherit; /* Inherit text color for title/subtitle */
+    height: 100%; /* Make the link wrapper fill the project-row */
+    /* min-height: 75vh; /* This should be on project-row, link wrapper fills it */
+}
+
+/* Ensure project-row styles from before still apply correctly */
+.project-row {
+    display: flex; /* Keep this if .project-link-wrapper is the only child */
+    flex-direction: column;
+    min-height: 75vh;
+    margin-bottom: var(--spacing-xxxl);
+    width: 100%;
+    /* max-width: var(--container-max-width); /* This should be handled by content-wrapper */
+    /* margin-left: auto; */ /* Handled by content-wrapper */
+    /* margin-right: auto; */ /* Handled by content-wrapper */
+    overflow: hidden; /* Recommended to contain transformed children if any */
+}
+
+.project-row .project-image-container {
+    width: 100%;
+    height: 75%; /* 75% of the project-row's height */
+    overflow: hidden;
+    position: relative;
+}
+
+.project-row .project-info {
+    width: 100%;
+    padding: var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* --- Project Detail Page Styles (Review/Confirm) --- */
+.project-detail-page .content-wrapper {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+}
+
+.project-detail-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.detail-project-title { /* H1 */
+    font-family: var(--font-secondary);
+    font-size: 2.75rem;
+    font-weight: 400;
+    line-height: 1.3;
+    /* For 2/3 width of container (1400px * 2/3 = ~933px) */
+    max-width: calc(var(--container-max-width) * 0.666);
+    /* Or a fixed max-width that approximates this, e.g., 900px */
+    /* max-width: 900px; */
+    margin-bottom: var(--spacing-s);
+}
+.detail-project-pretitle {
+    font-family: var(--font-primary);
+    font-size: .8em;
+    font-weight: 700;
+    color: var(--color-primary-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+.detail-project-subtitle { /* P */
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #555;
+    max-width: calc(var(--container-max-width) * 0.666);
+    /* max-width: 900px; */
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+.project-main-image-container {
+    width: 100%;
+    margin-bottom: var(--spacing-s);
+}
+
+.project-main-image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.image-description { /* Figcaption or P */
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    color: #666;
+    max-width: calc(var(--container-max-width) * 0.666);
+    margin-top: var(--spacing-s);
+    margin-bottom: var(--spacing-xxl);
+    line-height: 1.5;
+}
+
+.project-body {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xxxxxl);
+    /* If you want the body text also constrained to 2/3: */
+    max-width: calc(var(--container-max-width) * 0.666);
+}
+
+.project-body p {
+    margin-bottom: var(--spacing-l);
+}
+
+/* ... (other project-body heading styles) ... */
+
+.comparison-gallery {
+    margin-bottom: var(--spacing-xxxxxl);
+}
+
+.comparison-gallery h2 {
+    font-family: var(--font-primary);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-l);
+}
+
+.comparison-images {
+    display: flex; /* This creates the row */
+    gap: var(--spacing-l); /* Space between the two columns */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.comparison-item {
+    /* Each item tries to take 50% of the available space minus half the gap */
+    flex: 1 1 calc(50% - (var(--spacing-l) / 2));
+    min-width: 280px; /* Ensures they don't get too small before wrapping */
+    background-color: var(--color-white);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; /* To make figcaption part of the flex flow if needed */
+    flex-direction: column; /* Stack image and caption */
+}
+
+.comparison-item img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio, or set fixed height if desired */
+    /* If fixed height for comparison images: */
+    /* height: 300px; object-fit: cover; */
+    display: block;
+}
+
+.comparison-item figcaption {
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    padding: var(--spacing-s) var(--spacing-m);
+    margin-top: auto; /* Pushes caption to bottom if images have varying heights and fixed item height */
+}
+
+.project-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-secondary-accent);
+    margin-top: var(--spacing-xl);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-primary-accent);
+    border: 1px solid var(--color-primary-accent);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary-accent);
+    color: var(--color-white);
+}
+
+/* --- About Page Specifics --- */
+.about-page .content-wrapper {
+    padding-top: var(--spacing-xxxl); /* Ample space at the top */
+    padding-bottom: var(--spacing-xxxl); /* Ample space at the bottom */
+}
+
+.about-header {
+    margin-bottom: var(--spacing-xxl); /* Space after H1 and subheader */
+    text-align: left; /* Or 'center' if you prefer */
+}
+
+.about-header h1 {
+    font-family: var(--font-primary); /* Manrope */
+    font-size: 3rem; /* Or your preferred H1 size */
+    margin-bottom: var(--spacing-l);
+    color: var(--color-black);
+}
+
+.about-header .subheader {
+    font-family: var(--font-primary); /* Manrope */
+    font-size: 1.25rem;
+    line-height: 1.7;
+    max-width: 750px; /* Constrain line length for readability */
+    /* If centered text-align in .about-header, add margin: auto for subheader: */
+    /* margin-left: auto; margin-right: auto; */
+}
+
+.about-content {
+    font-family: var(--font-primary); /* Manrope */
+    font-size: 1.1rem; /* Slightly larger for readability, adjust as needed */
+    line-height: 1.8;
+    max-width: 800px; /* Constrain line length for main body paragraphs */
+    /* If .about-header is centered, and you want this centered too: */
+    /* margin-left: auto; margin-right: auto; */
+}
+
+.about-content p {
+    margin-bottom: var(--spacing-l);
+}
+
+/* If you want a slightly different style for the About page H1 than the global H1 */
+/* You can target it specifically: */
+/* .about-page h1 { ... } */
+
+/* Responsive adjustments for detail page elements */
+@media (max-width: 768px) {
+    .detail-project-title,
+    .detail-project-subtitle,
+    .image-description,
+    .project-body {
+        max-width: 100%; /* Full width on mobile */
+    }
+    .comparison-item {
+        flex-basis: 100%; /* Stack comparison items on smaller screens */
+    }
+    .comparison-item:not(:last-child) {
+        margin-bottom: var(--spacing-l); /* Add space when stacked */
+    }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) { /* Medium devices (tablets, less than 992px) */
+    .hero h1 {
+        font-size: 2.75rem;
+    }
+    .hero .subheader {
+        font-size: 1.15rem; /* 18px */
+    }
+    .project-info .project-title,
+    .project-info .project-subtitle {
+        width: 80%; /* Increase width on smaller screens */
+    }
+}
+
+
+@media (max-width: 768px) { /* Small devices (landscape phones, 768px and down) */
+    :root {
+        --header-height: 70px;
+    }
+    .navigation {
+        padding: 0 var(--spacing-m);
+    }
+    .nav-links {
+        display: none; /* Hide desktop nav links */
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-height); /* Position below header */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        border-bottom: 1px solid var(--color-secondary-accent);
+        padding-bottom: var(--spacing-m);
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+    }
+    .nav-links.active { /* Class to show mobile nav */
+        display: flex;
+    }
+    .nav-links li {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .nav-links li a {
+        padding: var(--spacing-m) 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid var(--color-secondary-accent);
+    }
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+    .nav-links a::after { /* Remove underline for mobile nav items if preferred */
+       display: none;
+    }
+    .dropdown-content { /* Adjust dropdown for mobile */
+        position: static; /* No longer absolute */
+        box-shadow: none;
+        border-top: 1px solid var(--color-secondary-accent);
+        margin-top: 0;
+        background-color: #fdfdfd; /* Slightly different bg to distinguish */
+    }
+    .dropdown-content a {
+        padding-left: var(--spacing-xxl); /* Indent dropdown items */
+    }
+
+    .btn-contact { /* Make contact button full width or adjust */
+        display: none; /* Hide it from top bar, could be moved into mobile menu */
+    }
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger icon */
+    }
+    .mobile-nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .mobile-nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .hero {
+        padding: var(--spacing-xxl) 0;
+    }
+    .hero h1 {
+        font-size: 2.25rem; /* 36px */
+    }
+    .hero .subheader {
+        font-size: 1rem; /* 16px */
+    }
+    .shortcut-buttons {
+        justify-content: center; /* Center buttons if they wrap */
+    }
+    .featured-work {
+        padding: var(--spacing-xl) 0;
+    }
+    .project-row {
+        min-height: 60vh; /* Adjust height for smaller screens */
+    }
+    .project-info .project-title,
+    .project-info .project-subtitle {
+        width: 90%; /* Further increase width */
+    }
+    .project-info .project-title {
+        font-size: 1.5rem; /* 24px */
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-name {
+        margin-bottom: var(--spacing-m);
+    }
+    .footer-social a {
+        margin: 0 var(--spacing-s);
+    }
+}
+
+@media (max-width: 576px) { /* Extra small devices (portrait phones, less than 576px) */
+    h1, .hero h1 {
+        font-size: 2rem; /* 32px */
+    }
+    .hero .subheader {
+        font-size: 0.95rem;
+    }
+    .project-info .project-title {
+        font-size: 1.3rem;
+    }
+    .project-info .project-subtitle {
+        font-size: 0.9rem;
+    }
+    .btn {
+        padding: var(--spacing-s) var(--spacing-m);
+        font-size: 0.9rem;
+    }
+    .shortcut-buttons .btn {
+        width: calc(50% - var(--spacing-s)); /* Two buttons per row */
+        text-align: center;
+    }
+    .shortcut-buttons {
+        gap: var(--spacing-s); /* Reduce gap for smaller buttons */
+    }
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Ochoa - Ideas, Data, and Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navigation"> <div class="logo">
+                <a href="index.html"><img src="images/carlos.svg" alt="Carlos Ochoa Portrait"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="projects.html" class="dropbtn">Work <span class="dropdown-arrow">&#9662;</span></a>
+                    <div class="dropdown-content">
+                        <a href="projects.html?filter=design">Design</a>
+                        <a href="projects.html?filter=strategy">Strategy</a>
+                        <a href="projects.html?filter=automation">Automation</a>
+                        <a href="projects.html?filter=experiments">Experiments</a>
+                    </div>
+                </li>
+            </ul>
+            <a href="#contact" class="btn btn-contact">Contact</a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm Carlos Ochoa, <span class="accent">a marketer</span>.</h1>
+                <p class="subheader">I've seen marketing evolve from print to pixels to AI. I craft stories and strategies that deliver, no matter the channel.</p>
+                <div class="shortcut-buttons">
+                    <a href="projects.html?filter=all" class="btn btn-shortcut">All</a>
+                    <a href="projects.html?filter=design" class="btn btn-shortcut">Design</a>
+                    <a href="projects.html?filter=strategy" class="btn btn-shortcut">Strategy</a>
+                    <a href="projects.html?filter=automation" class="btn btn-shortcut">Automation</a>
+                    <a href="projects.html?filter=experiments" class="btn btn-shortcut">Experiments</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-listing">
+            <div class="content-wrapper">
+                <h2 id="project-list-title">All Work</h2>
+
+                <div class="project-row" data-category="experiments">
+                     <a href="projects/closers-press.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/briq-cover.jpg" alt="Closers Press">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Closers Press</h3>
+                            <p class="project-subtitle">One-off publications are the new cold email. We delivered personalized storybooks and secured high-level meetings.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="design">
+                    <a href="projects/closers-press-website.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/closerspress.jpg" alt="Closers Press Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">The Closers Press Website</h3>
+                            <p class="project-subtitle">A website designed to convert high-value prospects using personalized landing pages and video.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="experiments">
+                    <a href="projects/cfp-websites.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/regalfin.jpg" alt="Regalfin AI-Generated Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">AI-Generated Websites for Financial Planners</h3>
+                            <p class="project-subtitle">Generating 600 personalized landing pages in hours using AI to supercharge B2B outreach.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="automation">
+                    <a href="projects/ctc-approvals.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/approvals.jpg" alt="Regalfin AI-Generated Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Common Thread Collective's Approval Platform</h3>
+                            <p class="project-subtitle">Replacing tedious manual ad approvals with an efficient, AI-powered web platform.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="automation">
+                    <a href="projects/ctc-reviews.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/reviews.jpg" alt="Code for the CTC Reviews Project">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Common Thread Collective's Review Analysis</h3>
+                            <p class="project-subtitle">Turning thousands of customer reviews into powerful ad angles and product insights using advanced Natural Language Processing.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="experiments">
+                    <a href="projects/handwritten-letters.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/handwritten-cover.jpg" alt="A sample handwritten letter">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">(Robot) Handwritten Letters for Square 6</h3>
+                            <p class="project-subtitle">Adding a personal touch to B2B outreach with robot-powered handwritten letters.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Not ready yet
+                <div class="project-row" data-category="experiments">
+                    <a href="projects/cpa-marketing-pod.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="https://fakeimg.pl/1280x800" alt="A sample handwritten letter">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">The CPA Marketing Pod</h3>
+                            <p class="project-subtitle">We engineered a podcast and newsletter strategy to capture leads and build authority within the accounting industry.</p>
+                        </div>
+                    </a>
+                </div>
+                -->
+
+                <div class="project-row" data-category="design">
+                    <a href="projects/interlace-consulting.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/interlace.jpg" alt="Interlace Consulting Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Interlace Consulting Website & Branding</h3>
+                            <p class="project-subtitle">Translating coaching expertise into a compelling brand identity and high-performing website.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="design">
+                    <a href="projects/lim-and-lim.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/lim-and-lim.jpg" alt="Lim and Lim Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Lim and Lim's Website and Branding</h3>
+                            <p class="project-subtitle">Balancing legacy and modernity: a complete rebrand and website overhaul for a community-focused CPA firm.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="experiments">
+                    <a href="projects/medical-rank.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/medical-rank.jpg" alt="Medical Rank Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Medical-Rank.com</h3>
+                            <p class="project-subtitle">Ranking for thousands of long-tail keywords with AI and programmatic SEO. An ambitious lead-gen experiment.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="experiments">
+                    <a href="projects/pandatron.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/pandatron-tree.jpg" alt="Tree pouch for Pandatron">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Pandatron's Gifting Campaign</h3>
+                            <p class="project-subtitle">Using personalized wine and symbolic tree kits to engage C-suite prospects for a change management SaaS.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-row" data-category="design">
+                    <a href="projects/radical-standard.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/radical-standard.jpg" alt="Radical Standard Website">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">The Radical Standard Website</h3>
+                            <p class="project-subtitle">Whimsical astronauts meet serious B2B SaaS: designing a unique brand and website for an email agency.  </p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Not Ready Yet
+                <div class="project-row" data-category="automation">
+                    <a href="projects/community-phone.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/community-phone.jpg" alt="Community Phone video still">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Community Phone</h3>
+                            <p class="project-subtitle">Implementing a CRM and email automation workflow to improve conversion rates.</p>
+                        </div>
+                    </a>
+                </div>
+                -->
+
+                <div class="project-row" data-category="design">
+                    <a href="projects/shots-in-the-dark.html" class="project-link-wrapper">
+                        <div class="project-image-container">
+                            <img src="images/shots-in-the-dark.jpg" alt="Shots in the Dark">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Shots in the Dark</h3>
+                            <p class="project-subtitle">Bold unsolicited redesigns shared on social media to showcase skills and spark high-level conversations.</p>
+                        </div>
+                    </a>
+                </div>
+
+                 <div id="no-projects-message" style="display: none; text-align: center; padding: var(--spacing-xxl) 0;">
+                    <p>No projects found in this category.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer" id="contact">
+        <div class="footer-content"> <div class="footer-name"> <p>&copy; <span id="currentYear"></span> Carlos Ochoa. All rights reserved.</p></div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/cochoa1/" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://x.com/carlos____ochoa" target="_blank" aria-label="X (formerly Twitter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
