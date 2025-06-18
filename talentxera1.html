@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatamesh Static Site</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <section class="hero">
+        <canvas id="gradient-canvas"></canvas>
+        <main class="content">
+            <img src="hero.svg">
+        </main>
+    </section>
+    <section class="content bottom">
+        <img src="307-1.jpg">
+    </section>
+
+    <script type="module">
+    import { Gradient } from './gradient.js';
+    const gradient = new Gradient();
+    gradient.initGradient('#gradient-canvas');
+    </script>
+</body>
+</html>
