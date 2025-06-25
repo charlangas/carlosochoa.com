@@ -1,0 +1,45 @@
+/* Define the gradient colors that the script will use */
+:root {
+  --gradient-color-1: #FA5F24;
+  --gradient-color-2: #F48F25;
+  --gradient-color-3: #8595A3;
+  --gradient-color-4: #212242;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+.hero {
+    position: relative;
+    height: 800px;
+}
+
+#gradient-canvas {
+    position: absolute; /* Changed from fixed to absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Changed to fill the hero container */
+    z-index: -1;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Changed to fill the hero container */
+}
+
+.content img {
+    /* The max-height and max-width ensure the image is responsive within the hero section */
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.bottom img {
+    width: 74%;
+    height: auto;
+}
