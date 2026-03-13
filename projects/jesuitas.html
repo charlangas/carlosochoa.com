@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesuit Influence Globe - ITESO Prototype v6</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <style>
+    body { margin: 0; overflow: hidden; background-color: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white; }
+    #globeViz { width: 100vw; height: 100vh; }
+    
+    #timeline-container {
+      position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%);
+      width: 60%; min-width: 300px; background: rgba(15, 15, 15, 0.85);
+      padding: 20px 30px; border-radius: 50px; display: flex; align-items: center; gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 204, 0, 0.2);
+    }
+    
+    .year-display { font-size: 1.5rem; font-weight: 300; color: #ffcc00; min-width: 60px; }
+    
+    button {
+      background: #ffcc00; color: #000; border: none; border-radius: 50%;
+      width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.1); }
+
+    input[type=range] { flex-grow: 1; -webkit-appearance: none; background: transparent; height: 4px; border-radius: 2px; }
+    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.2); border-radius: 2px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #ffcc00; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.8); }
+
+    #sidebar {
+      position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
+      background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(255, 204, 0, 0.3); padding: 40px 30px;
+      box-sizing: border-box; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.8); z-index: 10;
+    }
+    #sidebar.active { right: 0; }
+    #sidebar h2 { margin-top: 0; color: #ffcc00; font-weight: 400; font-size: 1.8rem; }
+    #sidebar .meta { color: #00e5ff; font-size: 0.9rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+    #sidebar p { line-height: 1.6; font-size: 1.1rem; color: #ddd; }
+    .close-btn { position: absolute; top: 20px; right: 20px; background: transparent; color: white; border: none; font-size: 1.5rem; cursor: pointer; }
+    .close-btn:hover { color: #ffcc00; }
+  </style>
+</head>
+<body>
+
+  <div id="globeViz"></div>
+
+  <div id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">✕</button>
+    <h2 id="side-title">Location Name</h2>
+    <div class="meta" id="side-meta">Active Years</div>
+    <p id="side-info">Historical context will appear here.</p>
+  </div>
+
+  <div id="timeline-container">
+    <button id="playPauseBtn">⏸</button>
+    <input type="range" id="yearSlider" min="1530" max="1814" value="1530" step="1">
+    <span class="year-display" id="currentYear">1530</span>
+  </div>
+
+  <script>
+    // --- 1. Generate the Soft Radial Gradient Texture (Heatmaps) ---
+   // --- 1. Generate the Red "Hard Core + Soft Glow" Texture ---
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    
+    // The sharp, 100% opacity center dot (Radius 0 to 15%)
+    gradient.addColorStop(0, 'rgba(255, 40, 40, 1)');     
+    gradient.addColorStop(0.15, 'rgba(255, 40, 40, 1)'); 
+    
+    // The immediate drop to 50% opacity for the outer glow
+    gradient.addColorStop(0.16, 'rgba(255, 40, 40, 0.5)'); 
+    
+    // Fading out smoothly to the edge
+    gradient.addColorStop(1, 'rgba(255, 40, 40, 0)');     
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+    const texture = new THREE.CanvasTexture(canvas);
+    const glowMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+
+    // --- 2. Data Sets ---
+    const regionalData = [
+      // --- LAS REDUCCIONES GUARANÍES (Provincia del Paraguay) ---
+      
+      { city: "San Ignacio Guazú", lat: -26.8900, lng: -57.0300, startYear: 1609, endYear: 1767, size: 8, info: "La primera de las reducciones guaraníes, establecida por Marcial de Lorenzana y Francisco de San Martín." },
+      
+      { city: "San Ignacio Miní", lat: -27.2557, lng: -55.5314, startYear: 1610, endYear: 1767, size: 9, info: "Una de las ruinas supervivientes más espectaculares en la actual Argentina, con una impresionante arquitectura barroca tallada por artesanos indígenas." },
+      
+      { city: "Nuestra Señora de Loreto", lat: -27.3331, lng: -55.5180, startYear: 1610, endYear: 1767, size: 8, info: "Sede de la primera imprenta de la región, que publicaba libros en idioma guaraní." },
+      
+      { city: "Santa María la Mayor", lat: -27.8881, lng: -55.3446, startYear: 1626, endYear: 1767, size: 8, info: "Una misión importante que sufrió fuertemente los ataques de los bandeirantes (cazadores de esclavos) antes de ser reubicada." },
+      
+      { city: "Yapeyú", lat: -29.4686, lng: -56.8183, startYear: 1627, endYear: 1767, size: 9, info: "La capital musical de las reducciones, famosa por la fabricación de instrumentos de alta calidad y la formación de coros." },
+      
+      { city: "São Miguel das Missões", lat: -28.5475, lng: -54.5555, startYear: 1632, endYear: 1767, size: 9, info: "Una enorme reducción en el actual Brasil. Fue un punto focal de la Guerra Guaranítica en la década de 1750." },
+      
+      { city: "Nuestra Señora de Santa Ana", lat: -27.3906, lng: -55.5806, startYear: 1633, endYear: 1767, size: 8, info: "Una reducción agrícola altamente productiva ubicada cerca del río Paraná." },
+      
+      { city: "Jesús de Tavarangue", lat: -27.0550, lng: -55.7510, startYear: 1685, endYear: 1767, size: 8, info: "Un impresionante sitio arquitectónico en Paraguay que presenta arcos de influencia morisca, dejado inconcluso al momento de la expulsión." },
+      
+      { city: "La Santísima Trinidad de Paraná", lat: -27.1330, lng: -55.7660, startYear: 1706, endYear: 1767, size: 9, info: "Una de las misiones paraguayas más ambiciosas y pobladas, destacada por su enorme plaza central." },
+
+      // --- CENTROS GLOBALES ---
+      { city: "Roma", lat: 41.9028, lng: 12.4964, startYear: 1540, endYear: 2026, size: 10, info: "Establecimiento de la sede central de la Compañía de Jesús." },
+      { city: "Macao", lat: 22.1987, lng: 113.5439, startYear: 1565, endYear: 1762, size: 9, info: "Base estratégica para organizar las misiones hacia China continental." }
+    ];
+
+    const journeysData = [
+      { name: "Francis Xavier", startLat: 38.7223, startLng: -9.1393, endLat: 15.2993, endLng: 74.1240, startYear: 1541, endYear: 1555, info: "Xavier sails from Lisbon to Goa." },
+      { name: "Francis Xavier", startLat: 15.2993, startLng: 74.1240, endLat: 31.5966, endLng: 130.5571, startYear: 1549, endYear: 1560, info: "Xavier's mission to Kagoshima, Japan." },
+      { name: "Eusebio Kino", startLat: 46.3625, startLng: 11.0360, endLat: 36.5271, endLng: -6.2886, startYear: 1678, endYear: 1686, info: "Kino departs Italy for Cádiz, Spain." },
+      { name: "Eusebio Kino", startLat: 36.5271, startLng: -6.2886, endLat: 19.4326, endLng: -99.1332, startYear: 1681, endYear: 1690, info: "Kino arrives in Mexico City." },
+      { name: "Eusebio Kino", startLat: 19.4326, startLng: -99.1332, endLat: 30.5833, endLng: -111.1667, startYear: 1687, endYear: 1711, info: "Kino establishes missions in the Pimería Alta (Sonora)." }
+    ];
+
+    // --- 3. Initialize Globe (Textured Contrast Mode with Atmosphere) ---
+    const world = Globe()
+      (document.getElementById('globeViz'))
+      .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+      .backgroundColor('#020823') 
+      .showAtmosphere(true) 
+      .atmosphereColor('#3a82f6') // Changed to a beautiful planetary blue
+      .atmosphereAltitude(0.25)
+      
+      // LAYER 1: Custom Soft Gradients
+      .customLayerData([]) 
+      .customThreeObject(d => {
+        const sprite = new THREE.Sprite(glowMaterial);
+        sprite.scale.set(d.size, d.size, 1);
+        return sprite;
+      })
+      .customThreeObjectUpdate((obj, d) => {
+        Object.assign(obj.position, world.getCoords(d.lat, d.lng, 0.015)); 
+      })
+      .onCustomLayerClick(d => openSidebar(d, "Region"))
+      .onCustomLayerHover(d => { document.body.style.cursor = d ? 'pointer' : 'default'; })
+      
+      // LAYER 2: Trailblazer Arcs
+      .arcsData([]) 
+      .arcStartLat(d => d.startLat)
+      .arcStartLng(d => d.startLng)
+      .arcEndLat(d => d.endLat)
+      .arcEndLng(d => d.endLng)
+      .arcColor(() => '#00e5ff') 
+      .arcDashLength(0.4)
+      .arcDashGap(0.2)
+      .arcDashAnimateTime(4000) 
+      .arcAltitude(0.2)
+      .arcStroke(0.6) 
+      .onArcClick(arc => openSidebar(arc, "Journey"))
+      .onArcHover(arc => { document.body.style.cursor = arc ? 'pointer' : 'default'; });
+
+    const globeMaterial = world.globeMaterial();
+    globeMaterial.color.set('#00000a'); 
+    globeMaterial.emissive.set('#000010');
+    globeMaterial.roughness = 0.9;
+
+    // --- 4. Fetch GeoJSON for the "Highlighter Overlay" ---
+    fetch('https://unpkg.com/three-globe/example/country-polygons/ne_110m_admin_0_countries.geojson')
+      .then(res => res.json())
+      .then(countries => {
+        world.polygonsData(countries.features)
+          .polygonCapColor(() => 'rgba(130, 160, 190, 0.2)') // A soft, slate grey-blue
+          .polygonSideColor(() => 'rgba(0,0,0,0)') 
+          .polygonStrokeColor(() => 'rgba(255, 255, 255, 0.0)') 
+          .polygonAltitude(0.005); 
+      });
+
+    // --- 5. Studio Lighting for 3D Mountain Shadows ---
+    const scene = world.scene();
+    scene.children = scene.children.filter(c => c.type !== 'AmbientLight' && c.type !== 'DirectionalLight');
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2)); 
+    const dLight = new THREE.DirectionalLight(0xffffff, 0.1);
+    dLight.position.set(-800, 2000, 400);
+    scene.add(dLight);
+
+    world.controls().autoRotate = true;
+    world.controls().autoRotateSpeed = 0.5;
+
+    // --- 6. UI & Timeline Logic ---
+    const slider = document.getElementById('yearSlider');
+    const yearDisplay = document.getElementById('currentYear');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    
+    function updateGlobeData(currentYear) {
+      const activeRegions = regionalData.filter(d => currentYear >= d.startYear && currentYear <= d.endYear);
+      world.customLayerData(activeRegions);
+
+      const activeJourneys = journeysData.filter(d => currentYear >= d.startYear && currentYear <= d.endYear);
+      world.arcsData(activeJourneys);
+    }
+
+    slider.addEventListener('input', (e) => {
+      const selectedYear = parseInt(e.target.value, 10);
+      yearDisplay.innerText = selectedYear;
+      updateGlobeData(selectedYear);
+    });
+
+    let isPlaying = true;
+    let playInterval;
+    const minYear = 1530;
+    const maxYear = 1814;
+
+    function startPlayback() {
+      playPauseBtn.innerText = '⏸';
+      isPlaying = true;
+      playInterval = setInterval(() => {
+        let current = parseInt(slider.value, 10);
+        if (current >= maxYear) current = minYear - 1; 
+        slider.value = current + 1;
+        yearDisplay.innerText = slider.value;
+        updateGlobeData(slider.value);
+      }, 800); 
+    }
+
+    function pausePlayback() {
+      playPauseBtn.innerText = '▶';
+      isPlaying = false;
+      clearInterval(playInterval);
+    }
+
+    playPauseBtn.addEventListener('click', () => { isPlaying ? pausePlayback() : startPlayback(); });
+
+    // --- 7. Sidebar Logic ---
+    const sidebar = document.getElementById('sidebar');
+    
+    function openSidebar(data, type) {
+      document.getElementById('side-title').innerText = type === "Journey" ? data.name : data.city;
+      document.getElementById('side-meta').innerText = type === "Journey" ? `Journey: ${data.startYear} - ${data.endYear}` : `Activa: ${data.startYear} - ${data.endYear}`;
+      document.getElementById('side-info').innerText = data.info;
+      sidebar.classList.add('active');
+      if (isPlaying) pausePlayback();
+    }
+
+    function closeSidebar() { sidebar.classList.remove('active'); }
+
+    updateGlobeData(minYear);
+    startPlayback(); 
+
+  </script>
+</body>
+</html>
